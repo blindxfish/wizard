@@ -38,6 +38,25 @@ class Particle{
         c.beginPath();
         c.arc(this.x,this.y,this.size,0,Math.PI * 2);
         c.closePath();
+        c.fill();
+    }
+    update(){
+        c.fillStyle=this.color;
+
+        //collision detection
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forcedirectionX = dx / distance;
+        let forcedirectionY = dy / distance;
+
+        //max distance past what the force will be 0
+        const maxDistance = 100;
+        let force = (maxDistance - distance) / maxDistance;
+        if(force < 0 ) force = 0;
+
+        let directionX = ;
         
         
     }
