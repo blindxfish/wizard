@@ -56,8 +56,50 @@ class Particle{
         let force = (maxDistance - distance) / maxDistance;
         if(force < 0 ) force = 0;
 
-        let directionX = ;
-        
-        
+        let directionX = (forcedirectionX * force * this.density * 0.6);
+        let directionY = (forcedirectionY * force * this.density * 0.6);
+
+            if(distance < mouse.radius + this.size){
+                this.x -= directionX;
+                this.y -= directionY;
+            }else{
+                if(this.x !== this.baseX){
+                    let dx = this.x -this.baseX;
+                    this.x -= dx/20;
+                }
+                if(this.y !== this.baseY){
+                    let dy = this.y -this.baseY;
+                    this.y -= dy/20;
+                }
+            } 
+
+        this.draw();
+
+        }
     }
+
+function init(){
+    particleArray = [];
+
+    for(let y = 0, y2 = data.height; y<y2; y++){
+        for(let x = 0, x2 = data.width; x < x2; x++){
+            if(data.data[(y*4*data.width) + (x*4) +3] > 128){
+                let positionX = x;
+                let positionY = y;
+                let color = "rgb(" + data.data[(y*4*data.width) + (x*4)] + "," +
+                                     data.data[(y*4*data.width) + (x*4) + 1] + "," + 
+                                     data.data[(y*4*data.width) + (x*4) + 2 + ")";
+                particleArray.push(new Particle(positionX *4 ,positionY *4,color))
+            }    
+        }
+    }
+}
+function animate(){
+    requestAnimationFrame(animate);
+    c.clearRect(0,0,innerWidth,innerHeight);
+
+    for(let i=0; i<particleArray.length; i++){
+        particleArray[i].update();
+    }
+}
 }
