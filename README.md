@@ -1,2 +1,2 @@
 # wizard
-Javascript &amp; Canvas example works 
+Javascript &amp; Canvas reference work
